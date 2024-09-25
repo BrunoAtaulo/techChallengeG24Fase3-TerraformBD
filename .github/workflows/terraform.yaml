@@ -5,7 +5,7 @@ on:
    branches:
    - main
    paths:
-   - terraform/**/*.tf
+   - terraform/**
  
 env:
  # verbosity setting for Terraform logs
