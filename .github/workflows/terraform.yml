@@ -3,7 +3,7 @@ name: "Terraform RDS"
 on:
  pull_request:
    branches:
-   - master
+   - main
    paths:
    - terraform/**
  
