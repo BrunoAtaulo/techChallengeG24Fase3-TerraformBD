@@ -22,7 +22,7 @@ resource "aws_security_group" "rds_sg" {
 
 #create a RDS Database Instance
 resource "aws_db_instance" "sqltechchallengeDb" {
-  allocated_storage       =  20
+  allocated_storage       =  10
   engine                  = "sqlserver-ex"
   engine_version          = "14.00.3049.1.v1"
   instance_class          = "db.t2.micro"
