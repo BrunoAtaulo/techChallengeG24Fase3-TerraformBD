@@ -1,15 +1,15 @@
 #provider as aws
 provider "aws" {
-    region     = "us-east-1"
+    region      = "us-east-1"
 }
 
 #create a security group for RDS Database Instance
 resource "aws_security_group" "rds_sg" {
   name = "rds_sg"
   ingress {
-    from_port       = 3306
-    to_port         = 3306
-    protocol        = "tcp"
+    from_port   = 1433
+    to_port     = 1433
+    protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
   egress {
@@ -21,16 +21,17 @@ resource "aws_security_group" "rds_sg" {
 }
 
 #create a RDS Database Instance
-resource "aws_db_instance" "mysqltechchallengeDb" {
-  engine               = "mysql"
-  identifier           = "rdstechchallengeDb"
-  allocated_storage    =  20
-  engine_version       = "5.7"
-  instance_class       = "db.t2.micro"
-  username             = "root"
-  password             = "170593??"
-  parameter_group_name = "default.mysql5.7"
-  vpc_security_group_ids = ["${aws_security_group.rds_sg.id}"]
-  skip_final_snapshot  = true
-  publicly_accessible =  true
+resource "aws_db_instance" "sqltechchallengeDb" {
+  allocated_storage       =  20
+  engine                  = "sqlserver-ex"
+  engine_version          = "14.00.3049.1.v1"
+  instance_class          = "db.t2.micro"
+  # identifier              = "LancheRapidoBD"
+  name                    = "LancheRapidoBD"
+  username                = "SA"
+  password                = "Pa55w0rd2021"
+  parameter_group_name    = "default.sqlserver-ex-14"
+  vpc_security_group_ids  = ["${aws_security_group.rds_sg.id}"]
+  skip_final_snapshot     = true
+  publicly_accessible     = true
 }
