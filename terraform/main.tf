@@ -4,8 +4,8 @@ provider "aws" {
 }
 
 #create a security group for RDS Database Instance
-resource "aws_security_group" "rds_sg" {
-  name = "rds_sg"
+resource "aws_security_group" "rds_secgrp" {
+  name = "rds_secgrp"
   ingress {
     from_port   = 1433
     to_port     = 1433
