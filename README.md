@@ -22,7 +22,7 @@ O provisionamento de todos os recursos é executado via GitHub Actions com base 
 ## Razões para Utilizar o MySQL
 Suporta diversas linguagens de programação;
 Alto desempenho, mesmo com grande volume de dados e consultas frequentes;
-O MySQL é conhecido por sua estabilidade, disponibilidade e confiabilidade na gestão e armazenamento de dados.
+O é SQL server é amplamente utilizado em sistemas de gerenciamento de bancos de dados (SGBD).
 
 ## Escolha do banco
 O Amazon RDS oferece um ambiente completamente gerenciado para bancos de dados relacionais, simplificando a administração sem comprometer as funcionalidades. Optamos por um banco de dados relacional devido às seguintes vantagens:
@@ -35,7 +35,7 @@ O Amazon RDS oferece um ambiente completamente gerenciado para bancos de dados r
 
 
 ## MER
-..... fazer
+
 
 
 ## Observação
