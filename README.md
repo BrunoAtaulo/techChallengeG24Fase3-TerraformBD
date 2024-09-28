@@ -19,7 +19,7 @@ Este repositório é responsável por configurar toda a infraestrutura do nosso 
 
 O provisionamento de todos os recursos é executado via GitHub Actions com base nos arquivos Terraform.
 
-## Razões para Utilizar o MySQL
+## Razões para Utilizar o SQL server
 Suporta diversas linguagens de programação;
 Alto desempenho, mesmo com grande volume de dados e consultas frequentes;
 O é SQL server é amplamente utilizado em sistemas de gerenciamento de bancos de dados (SGBD).
