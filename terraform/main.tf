@@ -31,7 +31,7 @@ resource "aws_db_instance" "sqltechchallengeDb" {
   username                = "SA"
   password                = "Pa55w0rd2021"
   parameter_group_name    = "default.sqlserver-ex-14"
-  vpc_security_group_ids  = ["${aws_security_group.rds_sg.id}"]
+  vpc_security_group_ids  = ["${aws_security_group.rds_secgrp.id}"]
   skip_final_snapshot     = true
   publicly_accessible     = true
 }
