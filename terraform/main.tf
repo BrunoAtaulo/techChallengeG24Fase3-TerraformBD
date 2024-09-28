@@ -24,13 +24,13 @@ resource "aws_security_group" "rds_secgrptechchallenge" {
 resource "aws_db_instance" "sqltechchallengeDb" {
   allocated_storage       =  20
   engine                  = "sqlserver-ex"
-  engine_version         = "14.00.3475.1.v1"  
+  engine_version         = "14.00.3475.1.v1"
   instance_class          = "db.t3.micro"
   # identifier              = "LancheRapidoBD"
   # name                    = "LancheRapidoBD"
   username                = "SA"
   password                = "Pa55w0rd2021"
-  parameter_group_name    = "default.sqlserver-ex-14"
+  parameter_group_name    = "sqlserver-ex-14"
   vpc_security_group_ids  = ["${aws_security_group.rds_secgrptechchallenge.id}"]
   skip_final_snapshot     = true
   publicly_accessible     = true
