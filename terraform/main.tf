@@ -1,9 +1,9 @@
-#provider as aws
+#AWS provider
 provider "aws" {
     region      = "us-east-1"
 }
 
-#create a security group for RDS Database Instance
+#security group for RDS Database Instance
 resource "aws_security_group" "rds_secgrptechchallenge" {
   name = "rds_secgrptechchallenge"
   ingress {
@@ -20,16 +20,14 @@ resource "aws_security_group" "rds_secgrptechchallenge" {
   }
 }
 
-#create a RDS Database Instance
+#RDS Database Instance
 resource "aws_db_instance" "sqltechchallengeDb" {
   allocated_storage       =  20
   engine                  = "sqlserver-ex"
   engine_version         = "14.00.3475.1.v1"
   instance_class          = "db.t3.micro"
-  # identifier              = "LancheRapidoBD"
-  # name                    = "LancheRapidoBD"
   username                = "SA"
-  password                = "Pa55w0rd2021"
+  password                = ${{ secrets.BD_PASSWORD }}
   parameter_group_name    = "sqlserver-ex-14"
   vpc_security_group_ids  = ["${aws_security_group.rds_secgrptechchallenge.id}"]
   skip_final_snapshot     = true
