@@ -4,8 +4,8 @@ provider "aws" {
 }
 
 #create a security group for RDS Database Instance
-resource "aws_security_group" "rds_secgrp" {
-  name = "rds_secgrp"
+resource "aws_security_group" "rds_secgrptechchallenge" {
+  name = "rds_secgrptechchallenge"
   ingress {
     from_port   = 1433
     to_port     = 1433
@@ -31,7 +31,7 @@ resource "aws_db_instance" "sqltechchallengeDb" {
   username                = "SA"
   password                = "Pa55w0rd2021"
   parameter_group_name    = "default.sqlserver-ex-14"
-  vpc_security_group_ids  = ["${aws_security_group.rds_secgrp.id}"]
+  vpc_security_group_ids  = ["${aws_security_group.rds_secgrptechchallenge.id}"]
   skip_final_snapshot     = true
   publicly_accessible     = true
 }
