@@ -24,7 +24,7 @@ resource "aws_security_group" "rds_secgrptechchallenge" {
 resource "aws_db_instance" "sqltechchallengeDb" {
   allocated_storage       =  10
   engine                  = "sqlserver-ex"
-  engine_version          = "14.00.1000.169.v1"
+  engine_version         = "14.00.1000.169.v1"  
   instance_class          = "db.t3.micro"
   # identifier              = "LancheRapidoBD"
   # name                    = "LancheRapidoBD"
