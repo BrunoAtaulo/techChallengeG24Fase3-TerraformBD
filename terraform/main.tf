@@ -27,7 +27,7 @@ resource "aws_db_instance" "sqltechchallengeDb" {
   engine_version          = "14.00.3049.1.v1"
   instance_class          = "db.t2.micro"
   # identifier              = "LancheRapidoBD"
-  name                    = "LancheRapidoBD"
+  # name                    = "LancheRapidoBD"
   username                = "SA"
   password                = "Pa55w0rd2021"
   parameter_group_name    = "default.sqlserver-ex-14"
