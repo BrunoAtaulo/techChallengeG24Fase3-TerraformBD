@@ -11,6 +11,7 @@ resource "aws_vpc" "my_rds_vpc" {
   }
 }
 
+
 # Create Internet Gateway
 resource "aws_internet_gateway" "my_rds_igw" {
   vpc_id = aws_vpc.my_rds_vpc.id
