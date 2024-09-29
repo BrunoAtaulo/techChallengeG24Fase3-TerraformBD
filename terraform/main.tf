@@ -3,7 +3,7 @@ provider "aws" {
     region      = "us-east-1"
 }
 
-#security group for RDS Database Instance
+#Security group for RDS Database Instance
 resource "aws_security_group" "rds_secgrptechchallenge" {
   name = "rds_secgrptechchallenge"
   ingress {
