@@ -11,6 +11,38 @@ resource "aws_vpc" "my_rds_vpc" {
   }
 }
 
+# Create Internet Gateway
+resource "aws_internet_gateway" "my_rds_igw" {
+  vpc_id = aws_vpc.my_rds_vpc.id
+  tags = {
+    Name = "RDS_Internet_Gateway"
+  }
+}
+
+# Create Route Table
+resource "aws_route_table" "my_rds_route_table" {
+  vpc_id = aws_vpc.my_rds_vpc.id
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.my_rds_igw.id
+  }
+  tags = {
+    Name = "RDS_Route_Table"
+  }
+}
+
+# Create Route Table Association for Subnet 1a
+resource "aws_route_table_association" "my_rds_rta_1a" {
+  subnet_id      = aws_subnet.my_rds_subnet_1a.id
+  route_table_id = aws_route_table.my_rds_route_table.id
+}
+
+# Create Route Table Association for Subnet 1b
+resource "aws_route_table_association" "my_rds_rta_1b" {
+  subnet_id      = aws_subnet.my_rds_subnet_1b.id
+  route_table_id = aws_route_table.my_rds_route_table.id
+}
+
 # Security group RDS Database Instance
 resource "aws_security_group" "rds_secgrptechchallenge" {
   name = "rds_secgrptechchallenge"
@@ -45,8 +77,7 @@ resource "aws_db_instance" "sqltechchallengeDb" {
   db_subnet_group_name    = aws_db_subnet_group.my_rds_subnet.name
 }
 
-# Criar duas sub-redes em diferentes zonas de disponibilidade
-# Subnet 1
+# Create two subnets in different availability zones
 resource "aws_subnet" "my_rds_subnet_1a" {
   vpc_id            = aws_vpc.my_rds_vpc.id
   cidr_block        = "10.0.1.0/24"
@@ -56,7 +87,6 @@ resource "aws_subnet" "my_rds_subnet_1a" {
   }
 }
 
-# Subnet 2
 resource "aws_subnet" "my_rds_subnet_1b" {
   vpc_id            = aws_vpc.my_rds_vpc.id
   cidr_block        = "10.0.2.0/24"
@@ -66,7 +96,7 @@ resource "aws_subnet" "my_rds_subnet_1b" {
   }
 }
 
-# Grupo de sub-rede para o RDS
+# RDS Subnet Group
 resource "aws_db_subnet_group" "my_rds_subnet" {
   name       = "my-rds-subnet-group"
   subnet_ids = [
