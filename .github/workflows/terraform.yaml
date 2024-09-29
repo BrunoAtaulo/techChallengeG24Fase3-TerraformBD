@@ -37,9 +37,6 @@ jobs:
        id: init
        run: terraform init
 
-     - name: Destroy Specific Resource
-       run: terraform destroy -target=aws_security_group.rds_secgrptechchallenge -auto-approve
-
      - name: Terraform Refresh
        run: terraform refresh
 
