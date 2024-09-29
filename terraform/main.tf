@@ -65,7 +65,7 @@ resource "aws_subnet" "my_rds_subnet" {
 
 resource "aws_db_subnet_group" "my_rds_subnet" {
   name       = "my-rds-subnet-group"
-  subnet_ids = [aws_subnet.my_subnet.id]
+  subnet_ids = [aws_subnet.my_rds_subnet.id]
   tags = {
     Name = "MyDBSubnetGroup"
   }
