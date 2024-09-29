@@ -57,7 +57,7 @@ resource "aws_db_instance" "sqltechchallengeDb" {
 resource "aws_subnet" "my_rds_subnet" {
   vpc_id            = aws_vpc.my_rds_vpc.id
   cidr_block        = "10.0.1.0/24"
-  availability_zone = "us-east-1"  # --remover--Tirei o a no final (us-east-1a)
+  availability_zone = "us-east-1a"
   tags = {
     Name = "My_rds_Subnet"
   }
