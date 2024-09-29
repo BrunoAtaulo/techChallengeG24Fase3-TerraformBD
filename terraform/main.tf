@@ -11,7 +11,6 @@ resource "aws_vpc" "my_rds_vpc" {
   }
 }
 
-
 # Create Internet Gateway
 resource "aws_internet_gateway" "my_rds_igw" {
   vpc_id = aws_vpc.my_rds_vpc.id
@@ -60,6 +59,10 @@ resource "aws_security_group" "rds_secgrptechchallenge" {
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "rds_secgrptechchallenge"
   }
 }
 
