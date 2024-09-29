@@ -1,9 +1,9 @@
 # AWS provider
 provider "aws" {
-    region      = "us-east-1"
+  region = "us-east-1"
 }
 
-# Create VPC --remover-- teste
+# Create VPC
 resource "aws_vpc" "my_rds_vpc" {
   cidr_block = "10.0.0.0/16"
   tags = {
@@ -14,10 +14,7 @@ resource "aws_vpc" "my_rds_vpc" {
 # Security group RDS Database Instance
 resource "aws_security_group" "rds_secgrptechchallenge" {
   name = "rds_secgrptechchallenge"
-
-  # inicio teste da VPC --remover--
-  vpc_id = aws_vpc.my_rds_vpc.id  # Referencia a VPC
-  # --remover--
+  vpc_id = aws_vpc.my_rds_vpc.id
 
   ingress {
     from_port   = 1433
@@ -35,37 +32,45 @@ resource "aws_security_group" "rds_secgrptechchallenge" {
 
 # RDS Database Instance
 resource "aws_db_instance" "sqltechchallengeDb" {
-  allocated_storage       =  20
+  allocated_storage       = 20
   engine                  = "sqlserver-ex"
   engine_version          = "14.00.3475.1.v1"
   instance_class          = "db.t3.micro"
   username                = "SA"
   password                = var.db_password
   parameter_group_name    = "sqlserver-ex-14"
-  vpc_security_group_ids  = ["${aws_security_group.rds_secgrptechchallenge.id}"]
+  vpc_security_group_ids  = [aws_security_group.rds_secgrptechchallenge.id]
   skip_final_snapshot     = true
   publicly_accessible     = true
-
-
-  # teste da subnet vpc --remover--
-  db_subnet_group_name    = aws_db_subnet_group.my_rds_subnet.name  # Adicionar um grupo de sub-rede
+  db_subnet_group_name    = aws_db_subnet_group.my_rds_subnet.name
 }
 
-
-# --remover-- Daqui pra baixo tudo teste de rede
-# Criar um grupo de sub-rede para a VPC
-resource "aws_subnet" "my_rds_subnet" {
+# Criar duas sub-redes em diferentes zonas de disponibilidade
+resource "aws_subnet" "my_rds_subnet_1a" {
   vpc_id            = aws_vpc.my_rds_vpc.id
   cidr_block        = "10.0.1.0/24"
   availability_zone = "us-east-1a"
   tags = {
-    Name = "My_rds_Subnet"
+    Name = "My_rds_Subnet_1a"
   }
 }
 
+resource "aws_subnet" "my_rds_subnet_1b" {
+  vpc_id            = aws_vpc.my_rds_vpc.id
+  cidr_block        = "10.0.2.0/24"
+  availability_zone = "us-east-1b"
+  tags = {
+    Name = "My_rds_Subnet_1b"
+  }
+}
+
+# Grupo de sub-rede para o RDS
 resource "aws_db_subnet_group" "my_rds_subnet" {
   name       = "my-rds-subnet-group"
-  subnet_ids = [aws_subnet.my_rds_subnet.id]
+  subnet_ids = [
+    aws_subnet.my_rds_subnet_1a.id,
+    aws_subnet.my_rds_subnet_1b.id
+  ]
   tags = {
     Name = "MyDBSubnetGroup"
   }
