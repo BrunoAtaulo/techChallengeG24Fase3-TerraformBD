@@ -39,12 +39,20 @@ resource "aws_route_table" "my_rds_route_table" {
 resource "aws_route_table_association" "my_rds_rta_1a" {
   subnet_id      = aws_subnet.my_rds_subnet_1a.id
   route_table_id = aws_route_table.my_rds_route_table.id
+
+  tags = {
+    Name         = "RouteTableAssociation-Subnet1a"
+  }
 }
 
 # Create Route Table Association for Subnet 1b
 resource "aws_route_table_association" "my_rds_rta_1b" {
   subnet_id      = aws_subnet.my_rds_subnet_1b.id
   route_table_id = aws_route_table.my_rds_route_table.id
+
+  tags = {
+    Name        = "RouteTableAssociation-Subnet1b"
+  }
 }
 
 # Security group RDS Database Instance
