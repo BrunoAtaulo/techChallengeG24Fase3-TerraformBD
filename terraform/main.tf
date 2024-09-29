@@ -46,6 +46,7 @@ resource "aws_db_instance" "sqltechchallengeDb" {
 }
 
 # Criar duas sub-redes em diferentes zonas de disponibilidade
+# Subnet 1
 resource "aws_subnet" "my_rds_subnet_1a" {
   vpc_id            = aws_vpc.my_rds_vpc.id
   cidr_block        = "10.0.1.0/24"
@@ -55,6 +56,7 @@ resource "aws_subnet" "my_rds_subnet_1a" {
   }
 }
 
+# Subnet 2
 resource "aws_subnet" "my_rds_subnet_1b" {
   vpc_id            = aws_vpc.my_rds_vpc.id
   cidr_block        = "10.0.2.0/24"
